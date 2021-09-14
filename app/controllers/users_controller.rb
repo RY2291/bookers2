@@ -1,11 +1,9 @@
 class UsersController < ApplicationController
-    
-    def new
-        @user = User.new(user_params)
-    end
-    
-    private
-    def user_params
-        params.require(:user).permit(:name, :introduction)
-    end
+  def show
+    @user = current_user
+    @book = Book.new
+  end
+  
+  
+  
 end
