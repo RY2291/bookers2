@@ -20,6 +20,7 @@
 
 <h1>Books</h1>
 <% @books.each do |book| %>
+<%= attachment_image_tag @user, :profile_image, :fill, 100, 100, format: "jpg", fallback: "no_image.jpg" %>
  <h4>Title</h4>
  <%= book.title %>
  <h4>Body</h4>

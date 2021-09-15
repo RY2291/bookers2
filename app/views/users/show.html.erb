@@ -1,11 +1,11 @@
 <h1>User info</h1>
-<%= attachment_image_tag @user, :profile_image, :fill, 60, 60, format: "jpeg" %>
+<p><%= attachment_image_tag @user, :profile_image, :fill, 100, 100, format: "jpg", fallback: "no_image.jpg" %></p>
 <h4>name</h4>
-<%= @user.name %>
+<%= @users.name %>
 <h4>introduction</h4>
-<%= @user.introduction %>
+<%= @users.introduction %>
 
-<p><%= link_to "マイページ", edit_user_path(@user.id) %></p>
+<p><%= link_to "マイページ", edit_user_path(@users.id) %></p>
 
 <h1>New book</h1>
 
@@ -21,5 +21,5 @@
 
  <h4>Title</h4>
 
- <h4>body</h4>
+ <h4>Opinion</h4>
 

@@ -1,15 +1,14 @@
-<h1>User.Indexページ</h1>
 
 <h1>User info</h1>
 <h4>name</h4>
-<%= @user.name %>
+<%= current_user.name %>
 <h4>introduction</h4>
-<%= @user.introduction %>
+<%= current_user.introduction %>
 
-<p><%= link_to "マイページ", edit_user_path(@user.id) %></p>
+<p><%= link_to "マイページ", edit_user_path(current_user) %></p>
+
 
 <h1>New book</h1>
-
 <%= form_with model: @book, local:true do |f| %>
   <h4>Title</h4>
   <%= f.text_field :title %>
@@ -19,3 +18,11 @@
 <% end %>
 
 <h1>Users</h1>
+<% @users.each do |user| %>
+ <h4>image</h4>
+ <%= attachment_image_tag user, :profile_image, :fill, 100, 100, format: "jpg", fallback: "no_image.jpg" %>
+ <h4>name</h4>
+ <%= user.name %>
+ 
+ <p><%= link_to "show", user_path(user.id) %></p>
+<% end %> 
