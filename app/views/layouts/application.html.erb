@@ -4,7 +4,8 @@
     <title>Bookers2</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
+    
+    <script src="https://kit.fontawesome.com/b58f995e83.js" crossorigin="anonymous"></script>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
@@ -20,7 +21,7 @@
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
           <% if user_signed_in? %>
             <ul class="navbar-nav ml-auto">
-              <li><a class="fas fa-home nav-link text-light" href="/users/21797"> Home</a></li>
+              <li><a class="fas fa-home nav-link text-light" href="/"> Home</a></li>
               <li><a class="fas fa-users nav-link text-light" href="/users"> Users</a></li>
               <li><a class="fas fa-book-open nav-link text-light" href="/books"> Books</a></li>
               <li><a class="fas fa-sign-out-alt nav-link text-light" rel="nofollow" data-method="delete" href="/users/sign_out"> logout</a></li>
@@ -38,7 +39,9 @@
       </nav>
     </header>
     <main>
-      <%= render 'layouts/notifications' %>
+      <% flash.each do |key, value| %>
+        <%= content_tag(:div, value, class: "#{key}") %>
+      <% end %>
       <%= yield %>
     </main>
     <footer>
