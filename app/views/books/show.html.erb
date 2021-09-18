@@ -45,17 +45,20 @@
      <table class='table'>
       <tbody>
         <tr>
-          <td><%= attachment_image_tag @user, :profile_image, :fill, 100, 100, format: "jpg", fallback: "no_image.jpg" %><br>
-          <%= link_to "@users.name", user_path(@user.id) %></td>
-          <td><%= "title" %></td>
-          <td><%= "body" %></td>
-          <td><%= link_to "edit", edit_book_path(@book.id) %></td>
-          <td><%= link_to "Destroy", book_path(@book.id), method: :delete, data: {confirm: "本当に消しますか？"} %></td>
+          <td>
+              <%= link_to user_path(@user.id) do %>
+               <%= attachment_image_tag @user, :profile_image, :fill, 100, 100, format: "jpg", fallback: "no_image.jpg" %>
+               <%= @user.name %>
+              <% end %>
+          </td>
+          <td><%= link_to @book.title, book_path(@book.id) %></td>
+          <td><%= @book.body %></td>
+          <% if current_user == @user.id %>
+           <td><%= link_to "edit", edit_book_path(@book.id) %></td>
+           <td><%= link_to "Destroy", book_path(@book.id), method: :delete, data: {confirm: "本当に消しますか？"} %></td>
+          <% end %>
         </tr>
       </tbody>
      </table>
     </div>
-</div>
-
-
-
+</div

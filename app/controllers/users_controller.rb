@@ -2,10 +2,12 @@ class UsersController < ApplicationController
   def show
     @user = current_user
     @book = Book.new
+    @books = @user.books.all
   end
 
   def index
     @users = User.all
+    @user = current_user
   end
 
   def edit
@@ -20,6 +22,12 @@ class UsersController < ApplicationController
     else
       render "edit"
     end
+  end
+
+  def destroy
+    user = User.find(params.id)
+    user.destroy
+    redirect_to users_path
   end
 
   private
