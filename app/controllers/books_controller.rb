@@ -20,6 +20,7 @@ class BooksController < ApplicationController
     @book = Book.find(params[:id])
     @user = @book.user
     @books = Book.all
+    @book_new = Book.new
   end
 
   def index
@@ -30,6 +31,13 @@ class BooksController < ApplicationController
 
   def edit
     @book = Book.find(params[:id])
+    # ==を使用する時は同じ単位で記述する
+    if @book.user == current_user
+      #renderがなくても同じ動作をする
+      render "edit"
+    else
+      redirect_to books_path
+    end
   end
 
   def update
