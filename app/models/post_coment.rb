@@ -1,2 +1,0 @@
-class PostComent < ApplicationRecord
-end
