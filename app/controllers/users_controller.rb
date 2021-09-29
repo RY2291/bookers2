@@ -34,6 +34,14 @@ class UsersController < ApplicationController
     redirect_to users_path
   end
 
+  def followings
+    @users = User.find(params[:id]).following.where.not(id: current_user.id)
+  end
+
+  def followers
+    @users = User.find(params[:id]).follower.where.not(id: current_user.id)
+  end
+
   private
   def user_params
     params.require(:user).permit(:name, :profile_image, :introduction)
