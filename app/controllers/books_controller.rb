@@ -22,7 +22,6 @@ class BooksController < ApplicationController
     @books = Book.all
     @book_new = Book.new
     @book_comment = BookComment.new
-    @comments = BookComment.all
   end
 
   def index

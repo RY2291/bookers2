@@ -39,7 +39,7 @@ class UsersController < ApplicationController
   end
 
   def followers
-    @users = User.find(params[:id]).follower.where.not(id: current_user.id)
+    @users = User.find(params[:id]).follower.where(id: current_user.id)
   end
 
   private

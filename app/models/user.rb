@@ -8,27 +8,26 @@ class User < ApplicationRecord
   has_many :book_comments, dependent: :destroy
   has_many :favorites, dependent: :destroy
 
-  #どのカラムを参照するか
+  #自分がフォローする側の関係性
   has_many :active_relationships, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
-  #参照したカラムを元に、関連するuser_idも参照できるように
+  #自分がフォローしている人を見たい（active_relationshipsを通じてRelationshipテーブルを参照）
   has_many :following, through: :active_relationships, source: :followed
-
+  #自分がフォローされる側の関係性
   has_many :passive_relationships, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy
   has_many :follower, through: :passive_relationships, source: :follower
 
-  def follow(other_user)
-    unless self == other_user
-      self.active_relationships.find_or_create_by(followed_id: other_user.id)
-    end
+
+  # createメソッド（モデルのインスタンス生成と保存を同時に行う）
+  def follow(user_id)
+    active_relationships.create(followed_id: user_id)
   end
 
-  def unfollow(other_user)
-    relationship = self.active_relationships.find_by(followed_id: other_user.id)
-    relationship.destroy if relationship
+  def unfollow(user_id)
+    active_relationships.find_by(followed_id: user_id).destroy
   end
 
-  def following?(other_user)
-    self.following.include?(other_user)
+  def following?(user)
+    following.include?(user)
   end
 
   attachment :profile_image
