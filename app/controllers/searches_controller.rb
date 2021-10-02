@@ -33,9 +33,9 @@ class SearchesController < ApplicationController
 
     def match(model, value)
         if model == "user"
-            User.where(name: @value)
+            User.where(name: value)
         elsif model == "book"
-            Book.where(title: @value)
+            Book.where(title: value)
         end
     end
 
@@ -63,7 +63,7 @@ class SearchesController < ApplicationController
         end
     end
 
-    def search_for(how, model, value)
+    def search_for(how)
         case how
         when "match"
             match(model, value)

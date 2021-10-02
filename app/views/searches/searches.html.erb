@@ -1,5 +1,5 @@
 <% if @user.present? %>
-  <h2>Users search for "<%= @user %>"</h2>
+  <h2>Users search for "<%= params[:search] %>"</h2>
   <table calss="table">
     <thead>
       <tr>
@@ -19,7 +19,7 @@
   <% end %>
   </table>
 <% elsif @book.present? %>
-  <h2>Books search for "<%= @value %>"</h2>
+  <h2>Books search for "<%= params[:search] %>"</h2>
   <table calss="table">
     <thead>
       <tr>
