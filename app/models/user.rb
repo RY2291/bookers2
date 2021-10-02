@@ -18,16 +18,19 @@ class User < ApplicationRecord
 
 
   # createメソッド（モデルのインスタンス生成と保存を同時に行う）
-  def follow(user_id)
-    active_relationships.create(followed_id: user_id)
+  def follow(another_user)
+    unless self == another_user
+      self.active_relationships.find_or_create_by(followed_id: another_user.id)
+      #active_relationships.find_or_create_by(followed_id: user_id) user_idだと同じ人をフォローしてしまう
+    end
   end
 
   def unfollow(user_id)
     active_relationships.find_by(followed_id: user_id).destroy
   end
 
-  def following?(user)
-    following.include?(user)
+  def following?(another_user)
+    self.following.include?(another_user)
   end
 
   attachment :profile_image
