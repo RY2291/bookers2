@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   devise_for :users
   root to: "homes#top"
   get "/home/about" => "homes#about"
+  get "/search" => "searches#searches", as: "search"
   resources :users, only: [:show, :index, :edit, :update,] do
     resource :relationships, only: [:create, :destroy]
     #memberは個別idがあり
