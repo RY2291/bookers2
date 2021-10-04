@@ -1,5 +1,5 @@
 class SearchesController < ApplicationController
-
+before_action :authenticate_user!
     def searches
         if params[:search].present?
             if params[:model] == "user"
