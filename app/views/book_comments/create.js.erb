@@ -1,0 +1,3 @@
+$("#comment_table").html("<%= j (render partial: "book_comments/comment_table", locals: { book: @book, user: @user }) %>");
+$(".input_comment").val("")
+alert("コメントをしました")
